@@ -1,0 +1,65 @@
+program M_min_z_v_J_V5;
+var
+a: array of array of integer;
+i,j,n,m,t: integer;
+max,min,j1,j2: integer;    //imax,imin,jmax,jmin
+begin
+     randomize;
+     write('n = ');
+     readln(n);
+     write('m = ');
+     readln(m);
+     writeln();
+     SetLength(a,n,m);
+
+     for i := 0 to n-1 do begin
+         SetLength(a[i],m);
+         for j := 0 to m-1 do begin
+             a[i,j] := random(50)-30;
+             write(a[i,j]:4);
+         end;
+         writeln();
+     end;
+     readln();
+
+     max := a[0,0];
+     j1 := 0;
+     min := a[0,0];
+     j2 := 0;
+
+     for i := 0 to n-1 do
+         for j := 0 to m-1 do
+             if a[i,j] < min then begin
+             min := a[i,j];
+             j1 := j;
+         end
+         else if a[i,j] > max then begin
+              max := a[i,j];
+              j2 := j;
+         end;
+
+// vivod max i min
+
+     writeln();
+     writeln('max: ', max);
+     writeln('min: ', min);
+     writeln();
+//                             //
+
+     if j1 <> j2 then begin
+     for i := 0 to n-1 do begin
+         t := a[i,j1];
+         a[i,j1] := a[i,j2];             // zamena j
+         a[i,j2] := t;
+     end;
+     end;
+//                             //
+     For i := 0 to n-1 do begin
+         For j := 0 to m-1 do begin
+             Write(a[i,j]:4);
+         end;
+         Writeln();
+     end;
+     Readln();
+
+end.
