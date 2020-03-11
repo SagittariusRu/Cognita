@@ -1,0 +1,78 @@
+program V_M_Lab_2;                                                                // C = A * (A * A - B) - 2 * (B + A) * B
+  var i, j, n, s, k: integer;
+    a, b, c, t, d: array of array of integer;                                     //      [  2 3 1 ]       [  2 7  13 ]
+                                                                                  //  A = [ -1 2 4 ]   B = [ -1 0  5  ]
+                                                                                  //      [  5 3 0 ]       [  5 13 21 ]
+
+begin
+
+  randomize;
+
+  write('Vvedite NxN = ');
+  readln(n);
+
+  setLength(a,n,n);
+  setLength(b,n,n);
+  setLength(c,n,n);
+  setLength(t,n,n);
+  setLength(d,n,n);
+
+  writeln();
+  writeln('Vvedite 1 matrix: ');
+  writeln();
+
+  for i := 0 to n-1 do
+      for j := 0 to n-1 do begin
+             read(a[i,j]);
+
+      end;
+
+  writeln();
+  writeln('Vvedite 2 matrix: ');
+  writeln();
+
+  for i := 0 to n-1 do
+      for j := 0 to n-1 do begin
+             read(b[i,j]);
+
+      end;
+
+  writeln();
+
+  for i := 0 to n-1 do
+      for j := 0 to n-1 do begin
+             t[i,j] := 0;
+             for k := 0 to n-1 do
+                 t[i,j] := t[i,j] + a[i,j] * a[k,j];
+             t[i,j] := t[i,j] - b[i,j];
+             d[i,j] := 2 * (a[i,j] + b[i,j]);
+
+      end;
+
+  for i := 0 to n-1 do
+      for j := 0 to n-1 do begin
+             c[i,j] := 0;
+             s := 0;
+             for k := 0 to n-1 do begin
+                    c[i,j] := c[i,j] + a[i,k] * t[k,j];
+                    s := s + d[i,k] * b[k,j];
+
+             end;
+             c[i,j] := c[i,j] - s;
+
+      end;
+
+  writeln('Otvet: ');
+  writeln();
+
+  for i := 0 to n-1 do begin
+         for j := 0 to n-1 do begin
+                write(c[i,j]:5);
+
+         end;
+         writeln();
+
+  end;
+  readln(s);
+
+end.
